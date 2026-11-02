@@ -1,0 +1,38 @@
+# Simple, classic algorithms only. Needs scikit-learn and nothing else.
+models:
+- {name: persistence, family: baseline, kind: persistence}
+- {name: climatology, family: baseline, kind: climatology}
+- name: logistic
+  family: baseline
+  kind: logistic
+  space:
+    C: [logfloat, 0.001, 100]
+- name: knn
+  family: simple
+  kind: knn
+  space:
+    n_neighbors: [int, 5, 80]
+    weights:
+    - choice
+    - [uniform, distance]
+- {name: naive_bayes, family: simple, kind: naive_bayes}
+- name: svm
+  family: simple
+  kind: svm
+  space:
+    C: [logfloat, 0.1, 50]
+    gamma: [logfloat, 0.0005, 0.5]
+- name: decision_tree
+  family: simple
+  kind: decision_tree
+  space:
+    max_depth: [int, 2, 12]
+    min_samples_leaf: [int, 5, 100]
+- name: random_forest
+  family: ensemble
+  kind: random_forest
+  stochastic: true
+  space:
+    n_estimators: [int, 100, 400]
+    max_depth: [int, 3, 16]
+    min_samples_leaf: [int, 2, 50]

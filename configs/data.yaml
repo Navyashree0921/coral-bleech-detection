@@ -1,0 +1,25 @@
+# Data sources (checked against NOAA pages; verify again before your final run).
+crw:
+  erddap_url: https://coastwatch.pfeg.noaa.gov/erddap/griddap/NOAA_DHW.csv   # dataset id NOAA_DHW, 5 km daily, 1985-04-01 to present
+  variables: [CRW_SST, CRW_HOTSPOT, CRW_DHW]     # HotSpot = SST minus the bleaching threshold (MMM)
+  start: "1985-04-01"
+  end: "2026-10-15"
+  chunk_years: 5            # request size per call (keeps ERDDAP happy)
+  water_search_steps: 3     # if a site falls on land, search up to 3 pixels (~15 km) for water
+nino:
+  url: https://psl.noaa.gov/data/correlation/nina34.anom.data   # monthly Nino 3.4 anomalies, PSL standard format
+  lag_months: 1             # a week uses the PREVIOUS completed month (the index is only known after month end)
+# APPROXIMATE coordinates from memory. Check each on a map and adjust.
+# The downloader snaps each point to the nearest valid 5 km water pixel.
+regions:
+  lakshadweep:
+    - {name: kavaratti, lat: 10.57, lon: 72.64}
+    - {name: agatti,    lat: 10.86, lon: 72.19}
+  gulf_of_mannar:
+    - {name: mandapam,  lat: 9.20,  lon: 79.20}
+    - {name: tuticorin, lat: 8.85,  lon: 78.25}
+  andaman:
+    - {name: port_blair, lat: 11.60, lon: 92.70}
+    - {name: havelock,   lat: 11.97, lon: 93.00}
+raw_dir: data/raw
+out_table: data/processed/reefs.csv

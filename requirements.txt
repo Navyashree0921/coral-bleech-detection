@@ -1,0 +1,12 @@
+numpy
+pandas
+scipy
+scikit-learn
+pyyaml
+xgboost
+lightgbm
+catboost
+torch        # optional: only needed for LSTM / GRU / CNN models
+shap         # optional: explainability step
+streamlit    # optional: dashboard step
+pytest

@@ -1,0 +1,15 @@
+# Shared evaluation protocol: every model runs through exactly this.
+horizons_weeks: [4, 8, 12]     # predict alert within the next N weeks
+alert_dhw: 4.0                 # NOAA alert level 1 threshold (degree heating weeks)
+folds:
+  n_folds: 4                   # walk-forward folds
+  test_block_years: 2          # each test fold covers this many years
+  inner_val_years: 2           # last years of training used to tune hyperparameters
+tuning:
+  n_trials: 12                 # same random-search budget for every tunable model
+  metric: pr_auc
+seeds: [0, 1, 2]               # stochastic models run once per seed
+precision_floor: 0.5           # for recall-at-precision metric
+bootstrap_reps: 200
+output_dir: reports/results
+onset_only: false              # true = only score reefs NOT already in alert (harder, more meaningful; recommended for the final study)
